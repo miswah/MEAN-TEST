@@ -27,6 +27,7 @@ router.post(
 
 router.get("/all", cleanBody, UserController.GetList);
 router.get("/:id", cleanBody, UserController.GetUser);
+router.get("/image/:id", cleanBody, UserController.GetUserImage);
 router.post(
   "/update/:id",
   cleanBody,

@@ -3,6 +3,7 @@ const Joi = require("joi");
 const mongooes = require("mongoose");
 /**Model Import */
 const User = require("./user.model");
+const path = require("path");
 
 /**Schema Validation */
 const UserSchema = Joi.object().keys({
@@ -130,12 +131,57 @@ exports.GetUser = async (req, res) => {
       });
     }
 
-    //send data in proper formate if data exists
+    // //send data in proper formate if data exists
     return res.json({
       error: false,
       status: 200,
       message: users,
     });
+  } catch (error) {
+    console.error("User-fetch-error", error);
+    return res.status(500).json({
+      error: true,
+      message: "Couldn't Find User",
+    });
+  }
+};
+
+/**Get User Data */
+exports.GetUserImage = async (req, res) => {
+  try {
+    //fetch entity id from request params
+    const userId = req.params.id;
+
+    //check if the entity id exists
+    if (!userId) {
+      return res.json({
+        error: false,
+        status: 404,
+        message: "user Id doesn't exists",
+      });
+    }
+
+    //Check if the entity id is valid
+    if (!mongooes.Types.ObjectId.isValid(userId)) {
+      return res.json({
+        error: true,
+        status: 400,
+        message: "Invalid user id",
+      });
+    }
+
+    //Fetch data from db
+    const users = await User.findById(userId);
+
+    if (!users) {
+      return res.status(404).json({
+        error: true,
+        message: "User Not Valid",
+      });
+    }
+    const filePath = path.join(__dirname, "../../");
+
+    res.sendFile(filePath + `images/${users.Image_Name}`);
   } catch (error) {
     console.error("User-fetch-error", error);
     return res.status(500).json({
