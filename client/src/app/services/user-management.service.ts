@@ -43,4 +43,8 @@ export class UserManagementService {
       responseType: 'blob',
     });
   }
+
+  updateUser(id: number, fd: FormData) {
+    return this.http.put(environment.APIURL + `/user/update/${id}`, fd);
+  }
 }

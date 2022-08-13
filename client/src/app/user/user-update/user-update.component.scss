@@ -1,0 +1,57 @@
+.main {
+  max-width: 90%;
+  margin-left: 5%;
+  margin-top: 50px;
+
+  .input-group {
+    max-width: 50%;
+    margin-left: 25%;
+  }
+
+  .upload__container {
+    max-width: 50%;
+    margin-left: 25%;
+    background: #fafbfe;
+    border: 1px dashed #0025bb;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--title {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+      color: #000000;
+      margin-top: 6px;
+    }
+
+    &--btn {
+      background: #fbfdfe;
+      border: 0.993165px solid #0025bb;
+      border-radius: 4.96582px;
+      padding: 5px 10px;
+    }
+  }
+}
+
+.btn-div {
+  button {
+    min-width: 50%;
+  }
+
+  button:disabled,
+  button[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
+}
+
+.image-container {
+  max-width: 50%;
+  max-height: 50%;
+  margin-left: 25%;
+}
