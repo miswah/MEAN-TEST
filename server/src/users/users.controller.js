@@ -228,3 +228,51 @@ exports.Update = async (req, res) => {
     });
   }
 };
+
+/**Delete User */
+exports.delete = async (req, res) => {
+  try {
+    //fetch entity id from request params
+    const userId = req.params.id;
+
+    //check if the entity id exists
+    if (!userId) {
+      return res.json({
+        error: false,
+        status: 404,
+        message: "user Id doesn't exists",
+      });
+    }
+
+    //Check if the entity id is valid
+    if (!mongooes.Types.ObjectId.isValid(userId)) {
+      return res.json({
+        error: true,
+        status: 400,
+        message: "Invalid user id",
+      });
+    }
+
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return res.json({
+        error: true,
+        status: 404,
+        message: "User Not Found",
+      });
+    }
+
+    return res.json({
+      error: false,
+      status: 200,
+      message: "User Deleted",
+    });
+  } catch (error) {
+    console.error("User-deletion-error", error);
+    return res.status(500).json({
+      error: true,
+      message: "Could not delete user",
+    });
+  }
+};

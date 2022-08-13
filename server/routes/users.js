@@ -33,5 +33,6 @@ router.post(
   upload.single("image"),
   UserController.Update
 );
+router.delete("/:id", cleanBody, UserController.delete);
 
 module.exports = router;
