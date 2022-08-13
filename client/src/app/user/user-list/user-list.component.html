@@ -45,7 +45,42 @@
             <a [routerLink]="['update', user._id]" style="color: black">
               <button type="button" class="btn btn-info">Edit</button>
             </a>
+
+            <button
+              style="margin-right: 1rem"
+              type="button"
+              class="btn btn-danger"
+              (click)="open(content)"
+            >
+              Delete
+            </button>
           </td>
+
+          <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+              <button
+                type="button"
+                class="btn-close"
+                aria-label="Close"
+                (click)="modal.dismiss('Cross click')"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>
+                Are you sure you wanna delete this user? This can't be undo.
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                (click)="modal.close('Yes'); delete(user._id)"
+              >
+                Yes
+              </button>
+            </div>
+          </ng-template>
         </tr>
       </ng-container>
     </tbody>

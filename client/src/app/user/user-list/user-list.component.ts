@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, EMPTY, Observable, tap } from 'rxjs';
 import { UserManagementService } from 'src/app/services/user-management.service';
 
@@ -8,14 +9,43 @@ import { UserManagementService } from 'src/app/services/user-management.service'
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
-  public userList$: Observable<any> = this.userService.getUserList().pipe(
-    catchError((err) => {
-      console.log(err);
-      return EMPTY;
-    })
-  );
+  closeResult = '';
+  public userList$: Observable<any> = EMPTY;
 
-  constructor(private userService: UserManagementService) {}
+  constructor(
+    private userService: UserManagementService,
+    private modalService: NgbModal
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getList();
+  }
+
+  getList() {
+    this.userList$ = this.userService.getUserList().pipe(
+      catchError((err) => {
+        console.log(err);
+        return EMPTY;
+      })
+    );
+  }
+
+  delete(id: number) {
+    this.userService.deleteUser(id).subscribe((data: any) => {
+      console.log('yo');
+
+      this.getList();
+    });
+  }
+
+  open(content: any) {
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result: any) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {}
+      );
+  }
 }

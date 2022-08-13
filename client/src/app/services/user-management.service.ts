@@ -22,4 +22,8 @@ export class UserManagementService {
   createNewUser(fd: FormData) {
     return this.http.post(environment.APIURL + `/user/create`, fd);
   }
+
+  deleteUser(id: number) {
+    return this.http.delete(environment.APIURL + `/user/${id}`, this.headers);
+  }
 }
