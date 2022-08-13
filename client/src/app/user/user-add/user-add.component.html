@@ -1,1 +1,94 @@
-<p>user-add works!</p>
+<section class="main">
+  <h2 class="lead text-center mb-3">Add New User</h2>
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="First Name"
+      aria-label="FirstName"
+      aria-describedby="basic-addon1"
+      [formControl]="firstName"
+      oninput="this.value = this.value.replace(/[^A-Za-z. ]/g, '').replace(/(\..*)\./g, '$1');"
+    />
+  </div>
+
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Last Name"
+      aria-label="LastName"
+      aria-describedby="basic-addon1"
+      [formControl]="lastName"
+      oninput="this.value = this.value.replace(/[^A-Za-z. ]/g, '').replace(/(\..*)\./g, '$1');"
+    />
+  </div>
+
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Email Address"
+      aria-label="Email Address"
+      aria-describedby="basic-addon2"
+      [formControl]="email"
+    />
+  </div>
+
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="PhoneNo"
+      aria-label="PhoneNo"
+      aria-describedby="basic-addon2"
+      maxlength="10"
+      [formControl]="phoneNumber"
+      oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+    />
+  </div>
+
+  <div class="container text-center mt-3">
+    <input
+      hidden
+      #doc
+      type="file"
+      (change)="fileChange($event)"
+      placeholder="Upload file"
+      accept=".png, jpg, jpeg"
+    />
+
+    <div class="row upload__container">
+      <div class="col-7">
+        <p class="upload__container--title">Upload Image</p>
+      </div>
+      <div class="col-5">
+        <button class="upload__container--btn" (click)="doc.click()">
+          Select File
+        </button>
+      </div>
+    </div>
+    <div class="upload--box mt-3" (click)="doc.click()" *ngIf="documentName">
+      {{ documentName }}
+      <br />
+      Uploaded Succesfully
+    </div>
+  </div>
+</section>
+
+<div class="btn-div text-center mt-5">
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="submit()"
+    [disabled]="
+      !firstName.valid ||
+      !lastName.valid ||
+      !email.valid ||
+      !phoneNumber.valid ||
+      !documentName
+    "
+  >
+    Add New User
+  </button>
+</div>

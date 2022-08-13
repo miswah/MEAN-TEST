@@ -18,4 +18,8 @@ export class UserManagementService {
   getUserList() {
     return this.http.get(environment.APIURL + `/user/all`, this.headers);
   }
+
+  createNewUser(fd: FormData) {
+    return this.http.post(environment.APIURL + `/user/create`, fd);
+  }
 }

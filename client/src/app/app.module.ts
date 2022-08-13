@@ -8,6 +8,7 @@ import { UserAddComponent } from './user/user-add/user-add.component';
 import { UserUpdateComponent } from './user/user-update/user-update.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserUpdateComponent,
     UserDetailsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
