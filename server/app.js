@@ -6,7 +6,10 @@ const cors = require("cors");
 require("dotenv").config();
 const PORT = 5000;
 
-//Database connection attempet
+/**Routes Imports */
+const UserRoutes = require("./routes/users");
+
+/**Database connection attempet */
 mongoose
   .connect(process.env.MONGO_URL, {
     dbName: "Cluster0",
@@ -34,6 +37,8 @@ app.get("/ping", (req, res) => {
     message: "Server is healthy",
   });
 });
+
+app.use("/user", UserRoutes);
 
 app.listen(PORT, () => {
   console.log("Server started listening on PORT : " + PORT);
