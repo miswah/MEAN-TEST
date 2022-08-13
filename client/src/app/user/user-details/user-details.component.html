@@ -1,1 +1,38 @@
-<p>user-details works!</p>
+<div class="container mt-5" *ngIf="userData$ | async as user">
+  <div class="image-container">
+    <img [src]="image" alt="" class="img img-fluid mb-5" />
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <p class="lead">First Name</p>
+    </div>
+    <div class="col-6">
+      <p class="lead">{{ user.message.First_Name }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <p class="lead">Last Name</p>
+    </div>
+    <div class="col-6">
+      <p class="lead">{{ user.message.Last_Name }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <p class="lead">Email Address</p>
+    </div>
+    <div class="col-6">
+      <p class="lead">{{ user.message.Email }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <p class="lead">Phone Number</p>
+    </div>
+    <div class="col-6">
+      <p class="lead">{{ user.message.Phone }}</p>
+    </div>
+  </div>
+</div>

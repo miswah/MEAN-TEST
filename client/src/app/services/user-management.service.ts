@@ -26,4 +26,21 @@ export class UserManagementService {
   deleteUser(id: number) {
     return this.http.delete(environment.APIURL + `/user/${id}`, this.headers);
   }
+
+  getUserDetails(id: number) {
+    return this.http.get(environment.APIURL + `/user/${id}`);
+  }
+
+  getUserImage(id: number) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      responseType: 'blob',
+      Accept: '*/*',
+      observe: 'response',
+    });
+    return this.http.get(environment.APIURL + `/user/image/${id}`, {
+      headers: headers,
+      responseType: 'blob',
+    });
+  }
 }
