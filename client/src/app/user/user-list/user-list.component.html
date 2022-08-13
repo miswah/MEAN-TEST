@@ -1,1 +1,53 @@
-<p>user-list works!</p>
+<section class="mt-5 main">
+  <h1 class="lead text-center">User List</h1>
+  <h6 class="card-title text-end">
+    <!-- Add new dealer -->
+    <a routerLink="create" style="color: white">
+      <button
+        type="button"
+        class="btn btn-primary btn-icon-text mb-2 mb-md-0 pull-right"
+      >
+        <i class="gg-add-r mr-2"></i>
+        Add New
+      </button>
+    </a>
+  </h6>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" class="text-center">First Name</th>
+        <th scope="col" class="text-center">Last Name</th>
+        <th scope="col" class="text-center">Phone No</th>
+        <th scope="col" class="text-center">Email</th>
+        <th scope="col" class="text-center">Created At</th>
+        <th scope="col" class="text-center">Updated At</th>
+        <th scope="col" class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="userList$ | async as userList">
+        <tr *ngFor="let user of userList.message; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td class="text-center">{{ user.First_Name }}</td>
+          <td class="text-center">{{ user.Last_Name }}</td>
+          <td class="text-center">{{ user.Phone | number }}</td>
+          <td class="text-center">{{ user.Email }}</td>
+          <td class="text-center">{{ user.createdAt | date: "medium" }}</td>
+          <td class="text-center">{{ user.updatedAt | date: "medium" }}</td>
+          <td class="text-center">
+            <a
+              [routerLink]="['view', user._id]"
+              style="color: black; margin-right: 1rem"
+            >
+              <button type="button" class="btn btn-info">View</button>
+            </a>
+            <a [routerLink]="['update', user._id]" style="color: black">
+              <button type="button" class="btn btn-info">Edit</button>
+            </a>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</section>
