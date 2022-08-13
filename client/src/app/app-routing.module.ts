@@ -8,7 +8,7 @@ import { UserUpdateComponent } from './user/user-update/user-update.component';
 const routes: Routes = [
   { path: '', component: UserListComponent },
   { path: 'create', component: UserAddComponent },
-  { path: 'update', component: UserUpdateComponent },
+  { path: 'update/:id', component: UserUpdateComponent },
   { path: 'view/:id', component: UserDetailsComponent },
 ];
 
